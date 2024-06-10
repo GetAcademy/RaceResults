@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using RaceResults;
 
-
-
+var results = new Results();
+results.ShowReport();

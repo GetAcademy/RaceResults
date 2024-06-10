@@ -1,12 +1,10 @@
-﻿using System.Numerics;
-
-namespace RaceResults
+﻿namespace RaceResults
 {
-    internal class RaceResults
+    internal class Results
     {
         public readonly List<TimeMeasurement> _timeMeasurements;
 
-        public RaceResults()
+        public Results()
         {
             var lines = File.ReadAllLines("timedata.csv");
             _timeMeasurements = new List<TimeMeasurement>();
@@ -14,16 +12,18 @@ namespace RaceResults
             {
                 var parts = line.Split(',');
                 var bibNumber = int.Parse(parts[0]);
+                var time = TimeOnly.Parse(parts[1]);
+                var km = parts[2];
                 var timeMeasurement = GetTimeMeasurement(bibNumber);
-
-
-                //new TimeMeasurement
-                //{
-                //    ,
-                //    TimeAtStart = TimeOnly.Parse(parts[1]),
-
-                //}
+                if (km == "0") timeMeasurement.TimeAtStart = time;
+                else if (km == "5") timeMeasurement.TimeAtStart = time;
+                else if (km == "10") timeMeasurement.TimeAtStart = time;
             }
+        }
+
+        public void ShowReport()
+        {
+
         }
 
         public TimeMeasurement GetTimeMeasurement(int bibNumber)
