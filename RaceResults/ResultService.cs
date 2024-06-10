@@ -1,10 +1,10 @@
 ﻿namespace RaceResults
 {
-    internal class Results
+    internal class ResultService
     {
         public readonly List<TimeMeasurement> _timeMeasurements;
 
-        public Results()
+        public ResultService()
         {
             var lines = File.ReadAllLines("timedata.csv");
             _timeMeasurements = new List<TimeMeasurement>();
