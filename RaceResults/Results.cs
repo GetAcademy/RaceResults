@@ -16,8 +16,8 @@
                 var km = parts[2];
                 var timeMeasurement = GetOrCreateTimeMeasurement(bibNumber);
                 if (km == "0") timeMeasurement.TimeAtStart = time;
-                else if (km == "5") timeMeasurement.TimeAt5k = time;
-                else if (km == "10") timeMeasurement.TimeAt10k = time;
+                else if (km == "5") timeMeasurement.TimeAt5K = time;
+                else if (km == "10") timeMeasurement.TimeAt10K = time;
             }
         }
 
@@ -26,7 +26,7 @@
             var finished = new List<TimeMeasurement>();
             foreach (var timeMeasurement in _timeMeasurements)
             {
-                if (timeMeasurement.TimeAt10k != null
+                if (timeMeasurement.TimeAt10K != null
                 && timeMeasurement.TimeAtStart != null)
                 {
                     finished.Add(timeMeasurement);
@@ -34,14 +34,14 @@
             }
             finished.Sort((tmA, tmB) =>
             {
-                var elapsedA = tmA.TimeAt10k.Value.ToTimeSpan() - tmA.TimeAtStart.Value.ToTimeSpan();
-                var elapsedB = tmB.TimeAt10k.Value.ToTimeSpan() - tmB.TimeAtStart.Value.ToTimeSpan();
+                var elapsedA = tmA.TimeAt10K.Value.ToTimeSpan() - tmA.TimeAtStart.Value.ToTimeSpan();
+                var elapsedB = tmB.TimeAt10K.Value.ToTimeSpan() - tmB.TimeAtStart.Value.ToTimeSpan();
                 return Convert.ToInt32(elapsedA.TotalMilliseconds - elapsedB.TotalMilliseconds);
             });
             Console.WriteLine("Startnr Tid");
             foreach (var timeMeasurement in finished)
             {
-                var elapsed = timeMeasurement.TimeAt10k.Value.ToTimeSpan()
+                var elapsed = timeMeasurement.TimeAt10K.Value.ToTimeSpan()
                               - timeMeasurement.TimeAtStart.Value.ToTimeSpan();
                 Console.WriteLine($"{timeMeasurement.BibNumber,7} {elapsed}");
             }
