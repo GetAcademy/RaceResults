@@ -4,8 +4,7 @@
     {
         public int BibNumber;
         public TimeOnly? TimeAtStart;
-        public TimeOnly? TimeAt5k;
-        public TimeOnly? TimeAt10k;
-
+        public TimeOnly? TimeAt5K;
+        public TimeOnly? TimeAt10K;
     }
 }

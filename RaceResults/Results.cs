@@ -1,6 +1,4 @@
-﻿using System.Runtime.Intrinsics.X86;
-
-namespace RaceResults
+﻿namespace RaceResults
 {
     internal class Results
     {
