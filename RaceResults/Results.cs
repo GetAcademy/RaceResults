@@ -38,7 +38,7 @@ namespace RaceResults
             {
                 var elapsedA = tmA.TimeAt10k.Value.ToTimeSpan() - tmA.TimeAtStart.Value.ToTimeSpan();
                 var elapsedB = tmB.TimeAt10k.Value.ToTimeSpan() - tmB.TimeAtStart.Value.ToTimeSpan();
-                return Convert.ToInt32(elapsedB.TotalMilliseconds - elapsedA.TotalMilliseconds);
+                return Convert.ToInt32(elapsedA.TotalMilliseconds - elapsedB.TotalMilliseconds);
             });
             Console.WriteLine("Startnr Tid");
             foreach (var timeMeasurement in finished)
