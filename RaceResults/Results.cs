@@ -16,7 +16,7 @@ namespace RaceResults
                 var bibNumber = int.Parse(parts[0]);
                 var time = TimeOnly.Parse(parts[1]);
                 var km = parts[2];
-                var timeMeasurement = GetTimeMeasurement(bibNumber);
+                var timeMeasurement = GetOrCreateTimeMeasurement(bibNumber);
                 if (km == "0") timeMeasurement.TimeAtStart = time;
                 else if (km == "5") timeMeasurement.TimeAt5k = time;
                 else if (km == "10") timeMeasurement.TimeAt10k = time;
@@ -49,7 +49,7 @@ namespace RaceResults
             }
         }
 
-        public TimeMeasurement GetTimeMeasurement(int bibNumber)
+        public TimeMeasurement GetOrCreateTimeMeasurement(int bibNumber)
         {
             foreach (var tm in _timeMeasurements)
             {
