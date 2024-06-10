@@ -18,8 +18,8 @@ namespace RaceResults
                 var km = parts[2];
                 var timeMeasurement = GetTimeMeasurement(bibNumber);
                 if (km == "0") timeMeasurement.TimeAtStart = time;
-                else if (km == "5") timeMeasurement.TimeAtStart = time;
-                else if (km == "10") timeMeasurement.TimeAtStart = time;
+                else if (km == "5") timeMeasurement.TimeAt5k = time;
+                else if (km == "10") timeMeasurement.TimeAt10k = time;
             }
         }
 
@@ -28,7 +28,8 @@ namespace RaceResults
             var finished = new List<TimeMeasurement>();
             foreach (var timeMeasurement in _timeMeasurements)
             {
-                if (timeMeasurement.TimeAt10k != null)
+                if (timeMeasurement.TimeAt10k != null
+                && timeMeasurement.TimeAtStart != null)
                 {
                     finished.Add(timeMeasurement);
                 }
@@ -39,11 +40,12 @@ namespace RaceResults
                 var elapsedB = tmB.TimeAt10k.Value.ToTimeSpan() - tmB.TimeAtStart.Value.ToTimeSpan();
                 return Convert.ToInt32(elapsedB.TotalMilliseconds - elapsedA.TotalMilliseconds);
             });
+            Console.WriteLine("Startnr Tid");
             foreach (var timeMeasurement in finished)
             {
                 var elapsed = timeMeasurement.TimeAt10k.Value.ToTimeSpan()
                               - timeMeasurement.TimeAtStart.Value.ToTimeSpan();
-                Console.WriteLine(elapsed);
+                Console.WriteLine($"{timeMeasurement.BibNumber,7} {elapsed}");
             }
         }
 
