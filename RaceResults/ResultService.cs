@@ -32,12 +32,7 @@
                     finished.Add(timeMeasurement);
                 }
             }
-            finished.Sort((tmA, tmB) =>
-            {
-                var elapsedA = tmA.TimeAt10K.Value.ToTimeSpan() - tmA.TimeAtStart.Value.ToTimeSpan();
-                var elapsedB = tmB.TimeAt10K.Value.ToTimeSpan() - tmB.TimeAtStart.Value.ToTimeSpan();
-                return Convert.ToInt32(elapsedA.TotalMilliseconds - elapsedB.TotalMilliseconds);
-            });
+            finished.Sort(ResultService.Compare);
             Console.WriteLine("Startnr Tid");
             foreach (var timeMeasurement in finished)
             {
@@ -45,6 +40,13 @@
                               - timeMeasurement.TimeAtStart.Value.ToTimeSpan();
                 Console.WriteLine($"{timeMeasurement.BibNumber,7} {elapsed}");
             }
+        }
+
+        private static int Compare(TimeMeasurement tmA, TimeMeasurement tmB)
+        {
+            var elapsedA = tmA.TimeAt10K.Value.ToTimeSpan() - tmA.TimeAtStart.Value.ToTimeSpan();
+            var elapsedB = tmB.TimeAt10K.Value.ToTimeSpan() - tmB.TimeAtStart.Value.ToTimeSpan();
+            return Convert.ToInt32(elapsedA.TotalMilliseconds - elapsedB.TotalMilliseconds);
         }
 
         public TimeMeasurement GetOrCreateTimeMeasurement(int bibNumber)
